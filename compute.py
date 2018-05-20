@@ -11,7 +11,7 @@ def index_class():
         students[s[0]] = s[2] + "," + s[1]
 
 
-def individual(component_name: str, in_score: list):
+def individual(component_name, in_score):
     max_score = in_score.pop(0)
 
     print("\n" + component_name + " grades (" + max_score + ")")
@@ -37,7 +37,7 @@ def individual(component_name: str, in_score: list):
     print("\n")
 
 
-def average(component_name: str, in_score: list):
+def average(component_name, in_score):
     max_score = in_score.pop(0)
     total = 0.0
 
@@ -73,7 +73,7 @@ def generate_report(data, pass_fail=50, sort_order="ID"):
     student_grade = []
 
     payload = norm_data if sort_order in marking_components + ["GR", "FL"] else None
-    final_order = student_id_in_sort_order(sort_order, payload)
+    final_order = sort_students(sort_order, payload)
 
     for student_id in final_order:
         student_name = students[student_id].split(",")
@@ -126,7 +126,7 @@ def calculate_final_total(norm_data, student_id, only_total=False):
         return total, match_a1, match_a2, match_pr, match_t1, match_t2
 
 
-def student_id_in_sort_order(sort_order="ID", sort_column=None):
+def sort_students(sort_order="ID", sort_column=None):
     if sort_order in marking_components:
         norm_a1, norm_a2, norm_pr, norm_t1, norm_t2 = sort_column
         payload = {
